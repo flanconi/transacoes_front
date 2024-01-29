@@ -1,0 +1,18 @@
+<h4 *ngIf="transacaoId">Transação {{transacaoId}} foi selecionada e você pode alterar as informações nos campos à baixo:</h4>
+<table [formGroup]="formTransacao">
+    <tr>
+        <td>Data:</td>
+        <td><input type="date" placeholder="Insira a data da transacão!" formControlName="data"/></td>
+    </tr>
+    <tr>
+        <td>Valor:</td>
+        <td><input type="number" placeholder="Insira o valor da transação!" formControlName="valor"/></td>
+    </tr>
+    <tr>
+        <td>Categoria:</td>
+        <td><input type="text" placeholder="Insira a categoria da transação!" formControlName="categoria"/></td>
+    </tr>
+</table>
+<button [disabled]="!transacaoId" (click)="alteraTransacao()">Alterar</button>
+<button [disabled]="transacaoId" (click)="criaListaTransacoes()">Adicionar nova Transação</button>
+<button [disabled]="transacaoId" (click)="salvaNovaTransacao()">Salvar</button>

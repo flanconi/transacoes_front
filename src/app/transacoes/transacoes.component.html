@@ -1,0 +1,34 @@
+<section style="display: flex; flex-direction: row; align-items: flex-start">
+    <div>
+        <h5 style="margin: 5px 0px;">Para filtrar por data clique <b (click)="filtro()">aqui</b> e para remover clique <b (click)="buscaTransacoes()">aqui</b></h5>
+        <table>
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Transação Id</th>
+                    <th>Transacões</th>
+                    <th>Mais opções</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let transacao of listaTransacoes; index as i">
+                    <td><input type="checkbox" (click)="seleciona(transacao)"
+                            [checked]="transacaoSelecionada.id === transacao.id"></td>
+                    <td>{{transacao.id}}</td>
+                    <td>{{transacao.transacao}}</td>
+                    <td>
+                        <button (click)="deletaTransacao(transacao.id!)"> X </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div style="margin-left: 10px;">
+        <h5 style="margin: 5px 0px;">Descubra o valor total gasto na categoria desejada:</h5>
+        <input type="search" [(ngModel)]="categoria"><button (click)="buscaValorGasto()">Buscar</button>
+        <h5 *ngIf="valorGastoPorCategoria">Valor gasto na categoria {{categoriaSelecionada}} é de: {{valorGastoPorCategoria | currency: 'BRL'}}</h5>
+    </div>
+</section>
+<h4>Caso seja necessário adicionar uma nova transação <b (click)="salvarSelecionado = true">clique aqui</b></h4>
+<app-form-transacao *ngIf="transacaoSelecionada.id || salvarSelecionado" [transacaoId]="transacaoSelecionada.id"
+    (statusFinalizado)="atualizaTela()"></app-form-transacao>
